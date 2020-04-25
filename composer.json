@@ -12,11 +12,11 @@
   "minimum-stability": "dev",
   "require": {
     "php": "^7.1.3",
-    "illuminate/console": "5.7.*",
-    "illuminate/support": "5.7.*",
-    "illuminate/application": "5.7.*",
-    "illuminate/config": "5.7.*",
-    "illuminate/cache": "5.7.*"
+    "illuminate/console": "^5.7",
+    "illuminate/support": "^5.7",
+    "illuminate/application": "^5.7",
+    "illuminate/config": "^5.7",
+    "illuminate/cache": "^5.7"
   },
   "autoload": {
     "psr-4": {
