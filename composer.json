@@ -1,7 +1,6 @@
 {
   "name": "weirdo/entrust",
   "description": "Entrust es una forma sucinta y flexible de agregar permisos basados en roles",
-  "type": "composer-plugin",
   "license": "MIT",
   "authors": [
     {
