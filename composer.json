@@ -1,0 +1,36 @@
+{
+  "name": "weirdo/entrust",
+  "description": "Entrust es una forma sucinta y flexible de agregar permisos basados en roles",
+  "type": "composer-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Angel Hidalgo",
+      "email": "aghabrego@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": "^7.1.3",
+    "illuminate/console": "self.version",
+    "illuminate/support": "self.version",
+    "illuminate/application": "self.version",
+    "illuminate/config": "self.version",
+    "illuminate/cache": "self.version"
+  },
+  "autoload": {
+    "psr-4": {
+      "Weirdo\\Entrust\\": "src/Entrust/"
+    }
+  },
+  "extra":{
+    "laravel":{
+      "providers":[
+        "Weirdo\\Entrust\\EntrustServiceProvider"
+      ],
+      "aliases":{
+        "Entrust": "Weirdo\\Entrust\\EntrustFacade"
+      }
+    }
+  }
+}
