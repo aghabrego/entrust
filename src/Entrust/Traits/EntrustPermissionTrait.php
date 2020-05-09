@@ -56,7 +56,7 @@ trait EntrustPermissionTrait
     public function cachedPermission($permissionName)
     {
         $primaryKey = $this->primaryKey;
-        $cacheKey = 'entrust_permission_' . $this->$primaryKey;
+        $cacheKey = "entrust_permission_{$this->$primaryKey}_{$permissionName}";
 
         return $this->getCachedPermission(
             'entrust.permissions_table',
