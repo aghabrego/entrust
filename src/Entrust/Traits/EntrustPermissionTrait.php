@@ -44,4 +44,21 @@ trait EntrustPermissionTrait
             return true;
         });
     }
+
+    /**
+     * Big block of caching functionality.
+     * @param string $permissionName
+     * @return mixed Roles
+     */
+    public function cachedPermission($permissionName)
+    {
+        $primaryKey = $this->primaryKey;
+        $cacheKey = 'entrust_permission_' . $this->$primaryKey;
+
+        return $this->getCachedPermission(
+            'entrust.permissions_table',
+            $cacheKey,
+            $permissionName
+        );
+    }
 }

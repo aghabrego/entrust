@@ -137,6 +137,24 @@ trait EntrustHelperTrait
     }
 
     /**
+     * @param string $tagKey
+     * @param string $cacheKey
+     * @param string $permissionName
+     * @return mixed
+     */
+    public function getCachedPermission($tagKey, $cacheKey, $permissionName, $key = 'name')
+    {
+        if (Cache::getStore() instanceof TaggableStore) {
+            return Cache::tags(Config::get($tagKey))
+                ->remember($cacheKey, Config::get('cache.ttl'), function () use ($permissionName, $key) {
+                    return $this->query()->where($key, $permissionName)->with('roles')->first();
+                });
+        } else {
+            return $this->query()->where($key, $permissionName)->with('roles')->first();
+        }
+    }
+
+    /**
      * Checks if the user has a module by its name.
      * @param string|array $name
      * @param string $tagKey
