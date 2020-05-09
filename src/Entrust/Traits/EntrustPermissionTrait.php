@@ -9,9 +9,12 @@ namespace Weirdo\Entrust\Traits;
  * @package Weirdo\Entrust
  */
 use Illuminate\Support\Facades\Config;
+use Weirdo\Entrust\Traits\EntrustHelperTrait;
 
 trait EntrustPermissionTrait
 {
+    use EntrustHelperTrait;
+
     /**
      * Many-to-Many relations with role model.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
