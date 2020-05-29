@@ -13,6 +13,7 @@ use InvalidArgumentException;
 use Illuminate\Cache\TaggableStore;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Database\Eloquent\Model;
 use Weirdo\Entrust\Traits\EntrustHelperTrait;
 
 trait EntrustUserTrait
@@ -330,5 +331,22 @@ trait EntrustUserTrait
         return $query->whereHas('roles', function ($query) use ($role) {
             $query->where('name', $role);
         });
+    }
+
+    /**
+     * @param array|string $modules
+     * @param string|array $permissions
+     * @param boolean $validateAll
+     * @return boolean
+     */
+    public function verifyAbility($modules, $permissions, $validateAll = false)
+    {
+        if ($this instanceof Model) {
+            $roles = $this->cachedRoles();
+
+            return $this->ability($roles, $permissions, $modules, ['validate_all' => $validateAll]);
+        }
+
+        return false;
     }
 }
