@@ -89,6 +89,15 @@ trait EntrustOptionMenuTrait
     }
 
     /**
+     * belongs-To relations with Module.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function module()
+    {
+        return $this->belongsTo(Config::get('entrust.module'), Config::get('entrust.module_foreign_key'));
+    }
+
+    /**
      * Boot the user model
      * Attach event listener to remove the many-to-many records when trying to delete
      * Will NOT delete any records if the user model uses soft deletes.

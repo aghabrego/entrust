@@ -148,6 +148,25 @@ trait EntrustUserTrait
     }
 
     /**
+     * Checks if the user has a option menu by its name.
+     * @param string|array $name option menu name or array of role names.
+     * @param bool $requireAll All option menus in the array are required.
+     * @return bool
+     */
+    public function hasOptionMenu($name, $requireAll = false)
+    {
+        $userPrimaryKey = $this->primaryKey;
+        $cacheKey = 'entrust_roles_for_user_' . $this->$userPrimaryKey;
+
+        return $this->checkIfItHasOptionMenu(
+            $name,
+            'entrust.role_user_table',
+            $cacheKey,
+            $requireAll
+        );
+    }
+
+    /**
      * Checks if the user has a role by its name.
      * @param string|array $name Role name or array of role names.
      * @param bool $requireAll All roles in the array are required.
@@ -235,8 +254,10 @@ trait EntrustUserTrait
         }
         foreach ($modules as $module) {
             $searchResult = $this->getCacheModuleUser($module);
+            $hasModule = $this->hasModules($module);
+            $hasOption = $this->hasOptionMenu("{$module}@{$searchResult->initial_action}");
             $checkedModules[$module] = [
-                'has' => $this->hasModules($module),
+                'has' => $hasModule && $hasOption ? true : false,
                 'id_name' => $searchResult->id_name,
             ];
         }

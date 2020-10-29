@@ -90,6 +90,15 @@ trait EntrustModuleTrait
     }
 
     /**
+     * Mas-Many relations with the Option menu.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function optionsMenu()
+    {
+        return $this->hasMany(Config::get('entrust.option_menu'), Config::get('entrust.module_foreign_key'));
+    }
+
+    /**
      * Boot the user model
      * Attach event listener to remove the many-to-many records when trying to delete
      * Will NOT delete any records if the user model uses soft deletes.

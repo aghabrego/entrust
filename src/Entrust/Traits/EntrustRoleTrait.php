@@ -17,6 +17,9 @@ trait EntrustRoleTrait
 {
     use EntrustHelperTrait;
 
+    /**
+     * @return mixed
+     */
     public function cachedPermissions()
     {
         $rolePrimaryKey = $this->primaryKey;
@@ -28,6 +31,9 @@ trait EntrustRoleTrait
         );
     }
 
+    /**
+     * @return mixed
+     */
     public function cachedModules()
     {
         $userPrimaryKey = $this->primaryKey;
@@ -35,6 +41,20 @@ trait EntrustRoleTrait
 
         return $this->getCachedModules(
             'entrust.role_module_table',
+            $cacheKey
+        );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function cacheOptionsMenu()
+    {
+        $userPrimaryKey = $this->primaryKey;
+        $cacheKey = "entrust_options_menu_for_role_{$this->$userPrimaryKey}";
+
+        return $this->getCachedOptionsMenu(
+            'entrust.role_option_menu_table',
             $cacheKey
         );
     }

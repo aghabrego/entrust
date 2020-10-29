@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 use Weirdo\Entrust\Models\EntrustModule;
+use Weirdo\Entrust\Models\EntrustOptionMenu;
 
 trait EntrustHelperTrait
 {
@@ -155,6 +156,43 @@ trait EntrustHelperTrait
     }
 
     /**
+     * Big block of caching functionality.
+     * @param string $fullAction
+     * @param string $tagKey
+     * @param string $cacheKey
+     * @return mixed
+     */
+    public function getCachedOptionMenu($fullAction, $tagKey, $cacheKey)
+    {
+        if (Cache::getStore() instanceof TaggableStore) {
+            return Cache::tags(Config::get($tagKey))
+                ->remember($cacheKey, Config::get('cache.ttl'), function () use ($fullAction) {
+                    return EntrustOptionMenu::query()->where('full_action', $fullAction)->first();
+                });
+        } else {
+            return EntrustOptionMenu::query()->where('full_action', $fullAction)->first();
+        }
+    }
+
+    /**
+     * Big block of caching functionality.
+     * @param string $tagKey
+     * @param string $cacheKey
+     * @return mixed
+     */
+    public function getCachedOptionsMenu($tagKey, $cacheKey)
+    {
+        if (Cache::getStore() instanceof TaggableStore) {
+            return Cache::tags(Config::get($tagKey))
+                ->remember($cacheKey, Config::get('cache.ttl'), function () {
+                    return $this->optionsMenu()->get();
+                });
+        } else {
+            return $this->optionsMenu()->get();
+        }
+    }
+
+    /**
      * Checks if the user has a module by its name.
      * @param string|array $name
      * @param string $tagKey
@@ -183,6 +221,44 @@ trait EntrustHelperTrait
                 // Validate against the Module table
                 foreach ($role->cachedModules() as $module) {
                     if (str_is($name, $module->controller)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if the user has a option menu by its name.
+     * @param string|array $name
+     * @param string $tagKey
+     * @param mixed $cacheKey
+     * @param bool $requireAll
+     * @return bool
+     */
+    public function checkIfItHasOptionMenu($name, $tagKey, $cacheKey, $requireAll = false)
+    {
+        if (is_array($name)) {
+            foreach ($name as $fullAction) {
+                $hasModule = $this->checkIfItHasOptionMenu($fullAction, $tagKey, $cacheKey);
+                if ($hasModule && !$requireAll) {
+                    return true;
+                } elseif (!$hasModule && $requireAll) {
+                    return false;
+                }
+            }
+
+            // If we've made it this far and $requireAll is FALSE, then NONE of the options menu were found
+            // If we've made it this far and $requireAll is TRUE, then ALL of the options menu were found.
+            // Return the value of $requireAll;
+            return $requireAll;
+        } else {
+            foreach ($this->getCachedRoles($tagKey, $cacheKey) as $role) {
+                // Validate against the Option menu table
+                foreach ($role->cacheOptionsMenu() as $optionMenu) {
+                    if (str_is($name, $optionMenu->full_action)) {
                         return true;
                     }
                 }
