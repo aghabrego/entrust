@@ -73,12 +73,12 @@ trait EntrustHelperTrait
             return Cache::tags(Config::get($tagKey))
                 ->remember($cacheKey, Config::get('cache.ttl'), function () use ($controller) {
                     $module = EntrustModule::query()->where('controller', $controller)->first();
-                    return $module ? $module->id_name : null;
+                    return $module ?? null;
                 });
         } else {
             $module = EntrustModule::query()->where('controller', $controller)->first();
 
-            return $module ? $module->id_name : null;
+            return $module ?? null;
         }
     }
 

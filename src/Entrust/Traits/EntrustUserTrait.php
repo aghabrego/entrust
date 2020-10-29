@@ -237,7 +237,7 @@ trait EntrustUserTrait
             $searchResult = $this->getCacheModuleUser($module);
             $checkedModules[$module] = [
                 'has' => $this->hasModules($module),
-                'id_name' => $searchResult,
+                'id_name' => $searchResult->id_name,
             ];
         }
 
