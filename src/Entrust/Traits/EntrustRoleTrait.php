@@ -72,6 +72,7 @@ trait EntrustRoleTrait
             Cache::tags(Config::get('entrust.role_module_table'))->flush();
             Cache::tags(Config::get('entrust.modules_table'))->flush();
             Cache::tags(Config::get('entrust.permissions_table'))->flush();
+            Cache::tags(Config::get('entrust.role_option_menu_table'))->flush();
         }
 
         return true;
@@ -90,6 +91,7 @@ trait EntrustRoleTrait
             Cache::tags(Config::get('entrust.role_module_table'))->flush();
             Cache::tags(Config::get('entrust.modules_table'))->flush();
             Cache::tags(Config::get('entrust.permissions_table'))->flush();
+            Cache::tags(Config::get('entrust.role_option_menu_table'))->flush();
         }
 
         return true;
@@ -108,6 +110,7 @@ trait EntrustRoleTrait
             Cache::tags(Config::get('entrust.role_module_table'))->flush();
             Cache::tags(Config::get('entrust.modules_table'))->flush();
             Cache::tags(Config::get('entrust.permissions_table'))->flush();
+            Cache::tags(Config::get('entrust.role_option_menu_table'))->flush();
         }
 
         return true;
@@ -228,6 +231,8 @@ trait EntrustRoleTrait
             Cache::tags(Config::get('entrust.options_menu_table'))->flush();
             Cache::tags(Config::get('entrust.role_module_table'))->flush();
             Cache::tags(Config::get('entrust.modules_table'))->flush();
+            Cache::tags(Config::get('entrust.permissions_table'))->flush();
+            Cache::tags(Config::get('entrust.role_option_menu_table'))->flush();
         }
     }
 
