@@ -3,6 +3,7 @@
 namespace Weirdo\Entrust\Middleware;
 
 use Closure;
+use Weirdo\Helper\Helper;
 use Illuminate\Cache\TaggableStore;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Cache;
@@ -12,7 +13,7 @@ use Weirdo\Entrust\Models\EntrustOptionMenu as OptionMenu;
 
 class EntrustOptionMenu
 {
-    use EntrustHelperTrait;
+    use EntrustHelperTrait, Helper;
 
     /**
      * @var Guard
@@ -30,8 +31,8 @@ class EntrustOptionMenu
 
     /**
      * Creates a new instance of the middleware.
-     *
      * @param Guard $auth
+     * @param OptionMenu $optionMenu
      */
     public function __construct(Guard $auth, OptionMenu $optionMenu)
     {
@@ -39,10 +40,7 @@ class EntrustOptionMenu
         $this->optionMenu = $optionMenu;
         $controller = self::getActionName();
         $this->action = self::getMethodInExecutionModulo();
-
-        if (is_array($controller)) {
-            $this->controller = isset($controller[1]) ? $controller[1] : $controller[0];
-        }
+        $this->controller = is_array($controller) ? $this->findFirstMatch($controller, "/Controller/i") : $controller;
     }
 
     /**

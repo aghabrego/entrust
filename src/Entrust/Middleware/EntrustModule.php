@@ -9,6 +9,7 @@ namespace Weirdo\Entrust\Middleware;
  * @package Weirdo\Entrust
  */
 use Closure;
+use Weirdo\Helper\Helper;
 use Illuminate\Cache\TaggableStore;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Cache;
@@ -18,7 +19,7 @@ use Weirdo\Entrust\Models\EntrustModule as Module;
 
 class EntrustModule
 {
-    use EntrustHelperTrait;
+    use EntrustHelperTrait, Helper;
 
     const DELIMITER = '|';
 
@@ -39,18 +40,15 @@ class EntrustModule
 
     /**
      * Creates a new instance of the middleware.
-     *
      * @param Guard $auth
+     * @param Module $module
      */
     public function __construct(Guard $auth, Module $module)
     {
         $this->auth = $auth;
         $this->module = $module;
         $controller = self::getActionName();
-
-        if (is_array($controller) && isset($controller[0])) {
-            $this->controller = $controller[0];
-        }
+        $this->controller = is_array($controller) ? $this->findFirstMatch($controller, "/Controller/i") : $controller;
     }
 
     /**
