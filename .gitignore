@@ -11,6 +11,7 @@ cache/
 composer.phar
 .DS_Store
 Thumbs.db
+.phpunit.*
 
 /conf
 .idea
