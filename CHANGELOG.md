@@ -7,6 +7,7 @@
 - Fix: Corrigiendo composer.
 - Agregando CHANGELOG.
 - Fix: Agregando ````.phpunit.result.cache``` al .gitignore.
+- Actualizando ```README.md```.
 
 ## 0.0.1 - 2020-04-24
 

@@ -4,8 +4,8 @@
 
 ## Caracteristicas
 
-- PHP >= 7.3
-- Laravel >= 5.7
+- PHP ^8.0|^8.1
+- Laravel 8.0|^8.1
 
 ### Como utilizarlo
 
@@ -13,3 +13,7 @@
 - `cd entrust`
 - `composer install`
 - `./vendor/bin/phpunit`
+
+## Copyright
+
+Ver [LICENSE](https://gitlab.com/grupoprodecasa/authy/blob/master/LICENSE) para mas detalles.
