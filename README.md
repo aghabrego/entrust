@@ -5,7 +5,7 @@
 ## Caracteristicas
 
 - PHP ^8.0|^8.1
-- Laravel 8.0|^8.1
+- Laravel 8
 
 ### Como utilizarlo
 

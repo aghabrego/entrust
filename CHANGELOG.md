@@ -8,6 +8,7 @@
 - Agregando CHANGELOG.
 - Fix: Agregando ````.phpunit.result.cache``` al .gitignore.
 - Actualizando ```README.md```.
+- Fix: Corrigiendo versionamiento en el README.md de Laravel.
 
 ## 0.0.1 - 2020-04-24
 
