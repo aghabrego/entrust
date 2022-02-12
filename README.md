@@ -16,4 +16,4 @@
 
 ## Copyright
 
-Ver [LICENSE](https://gitlab.com/grupoprodecasa/authy/blob/master/LICENSE) para mas detalles.
+Ver [LICENSE](https://gitlab.com/grupoprodecasa/entrust/-/blob/master/LICENSE) para mas detalles.
