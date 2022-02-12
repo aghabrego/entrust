@@ -22,3 +22,5 @@ Thumbs.db
 # sublime phpintel plugin
 
 /.phpintel
+
+.phpunit.result.cache
