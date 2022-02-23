@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.4 - 2022-02-23
+
+- Corrigiendo nombre y año en el archivo ```LICENSE```.
+- Fix: Actualizando token para obtener acceso a los repositorios. 
+
 ## 0.0.3 - 2022-02-14
 
 - Agregando  token de acceso personal para obtener acceso a los repositorios.
