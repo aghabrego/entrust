@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.0.7 - 2022-11-30
+
+- Revirtiendo cambios no era requeridos.
+
+## 0.0.6 - 2022-11-29
+
+- Fix: Aplicando correcciones al Middleware de EntrustPermission para tomar en cuenta el rol en la verificación del permiso.
+- Actualizando dependencias.
+
 ## 0.0.5 - 2022-10-11
 
 - Actualizando dependencias.
