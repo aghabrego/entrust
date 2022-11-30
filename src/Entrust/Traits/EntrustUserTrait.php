@@ -358,15 +358,16 @@ trait EntrustUserTrait
      * @param array|string $modules
      * @param string|array $permissions
      * @param boolean $validateAll
+     * @param string $returnType
      * @return boolean
      */
-    public function verifyAbility($modules, $permissions, $validateAll = true)
+    public function verifyAbility($modules, $permissions, $validateAll = true, $returnType = 'boolean')
     {
         if ($this instanceof Model) {
             $roles = $this->cachedRoles();
             $arrRoles = $this->tearOffItems($roles, 'name')->toArray();
 
-            return $this->ability($arrRoles, $permissions, $modules, ['validate_all' => $validateAll]);
+            return $this->ability($arrRoles, $permissions, $modules, ['validate_all' => $validateAll, 'return_type' => $returnType]);
         }
 
         return false;
