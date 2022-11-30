@@ -3,6 +3,7 @@
 ## 0.0.7 - 2022-11-30
 
 - Revirtiendo cambios no era requeridos.
+- Corrigiendo conflictos.
 
 ## 0.0.6 - 2022-11-29
 
