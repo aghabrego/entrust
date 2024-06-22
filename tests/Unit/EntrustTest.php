@@ -9,6 +9,8 @@ use Weirdo\Entrust\Entrust;
 
 class EntrustTest extends TestCase
 {
+    protected $app;
+
     public function testHasRole()
     {
         /*
@@ -299,8 +301,8 @@ class EntrustTest extends TestCase
     protected function filterTestExecution($methodTested, $mockedMethod, $returnValue, $filterTest, $abort, $expectedResponse)
     {
         // Mock Objects
-        $app = m::mock('Illuminate\Foundation\Application');
-        $app->router = m::mock('Route');
+        $app = m::mock(\Illuminate\Foundation\Application::class);
+        $app->shouldReceive('offsetGet')->once()->andReturnSelf();
         $entrust = m::mock("Weirdo\Entrust\Entrust[$mockedMethod]", [$app]);
 
         // Static values
@@ -357,8 +359,8 @@ class EntrustTest extends TestCase
         $abort = false,
         $expectedResponse = null
     ) {
-        $app = m::mock('Illuminate\Foundation\Application');
-        $app->router = m::mock('Route');
+        $app = m::mock(\Illuminate\Foundation\Application::class);
+        $app->shouldReceive('offsetGet')->once()->andReturnSelf();
         $entrust = m::mock('Weirdo\Entrust\Entrust[hasRole, can]', [$app]);
 
         // Static values
