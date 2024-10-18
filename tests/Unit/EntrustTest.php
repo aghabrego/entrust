@@ -303,6 +303,8 @@ class EntrustTest extends TestCase
         // Mock Objects
         $app = m::mock(\Illuminate\Foundation\Application::class);
         $app->shouldReceive('offsetGet')->once()->andReturnSelf();
+        $app->shouldReceive('offsetSet')->once()->andReturnSelf();
+        $app->router = m::mock('Route');
         $entrust = m::mock("Weirdo\Entrust\Entrust[$mockedMethod]", [$app]);
 
         // Static values
@@ -361,6 +363,8 @@ class EntrustTest extends TestCase
     ) {
         $app = m::mock(\Illuminate\Foundation\Application::class);
         $app->shouldReceive('offsetGet')->once()->andReturnSelf();
+        $app->shouldReceive('offsetSet')->once()->andReturnSelf();
+        $app->router = m::mock('Route');
         $entrust = m::mock('Weirdo\Entrust\Entrust[hasRole, can]', [$app]);
 
         // Static values
